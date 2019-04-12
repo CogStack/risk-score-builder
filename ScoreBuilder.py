@@ -10,6 +10,7 @@ Created on Fri Apr 12 11:35:22 2019
 
 import pandas as pd
 from py2neo import Graph
+import urllib2, json
 
 
 class MapperTemplate:
@@ -157,6 +158,48 @@ class HPOUMLSMapper(MapperTemplate):
         else:
             out = df2
         return out
+
+class ICD10_UMLSMapper(MapperTemplate):
+    """
+    Use the bioontology API to map ICD10 oto UMLS CUI. Note does not do any
+    navigation of the ICD10 tree i.e. only supports depth==0
+    """
+    def __init__(self, conf):
+        MapperTemplate.__init__(self, conf)
+        # #connect to Neo4j server
+        self.REST_URL = "http://data.bioontology.org/ontologies/ICD10/classes/http%3A%2F%2Fpurl.bioontology.org%2Fontology%2FICD10%2F"
+        self.API_KEY = conf['key']
+        
+        #hacky fix for a missing term
+        self.manual_terms = {}
+        self.manual_terms['U80'] = {'cui':['C1269757'], 'prefLabel': 'Infection resistant to penicillin'}
+
+    def get_descendants(self, start, depth):
+        if depth != 0:
+            print "ICD10_UMLS mapper does not support depth limited search"
+            return
+        res = self.get_json(self.REST_URL, start)
+        cui = set(res['cui'])
+        return cui
+        
+        
+    def get_json(self, base_url, term):
+        url = base_url + term
+        opener = urllib2.build_opener()
+        opener.addheaders = [('Authorization', 'apikey token=' + self.API_KEY)]
+        try:
+            op = opener.open(url)
+            res = json.loads(op.read())
+            res['mapping'] = 'bioportal'
+        except:
+            print "not found"
+            if term in self.manual_terms:
+                res = self.manual_terms[term]
+                res['mapping'] = 'manual'
+            else:
+                res = {'cui': "", "prefLabel": "NOT FOUND", 'mapping': 'NONE'}
+        return res
+    
     
 
 class ScoreBuilder:
@@ -251,6 +294,17 @@ if __name__ == "__main__":
     print definition
     for comp in definition:
         print "%s: %s concepts" % (comp, len(definition[comp]['concepts']))
+        
+    #ICD10
+    icd = ICD10_UMLSMapper(conf['ICD10'])
+    sb.add_mapper('ICD10_UMLS', icd)
+    
+    #icd.get_descendants('W19', 0)
+    definition = sb.build('input_files/icd10_test_definition.csv')
+    print definition
+    for comp in definition:
+        print "%s: %s concepts" % (comp, len(definition[comp]['concepts']))
+    
     
     
     

@@ -30,9 +30,11 @@ name (optional) | id
 Name of the concept | identifier in the ontology you're using
 
 ### 3. The ontology
-You need the ontology/ontologies you're using for the NLP and score definitions somewhere and a mapper class (subclass of MapperTemplate) that can use the ontology to go from a root node to all child nodes at a given depth. All current mappers work with neo4j databases.
+You need the ontology/ontologies you're using for the NLP and score definitions somewhere and a mapper class (subclass of MapperTemplate) that can use the ontology to go from a root node to all child nodes at a given depth. All current mappers work with neo4j databases or the bioontology API.
 
 Create a config.yaml file with the connection information for any ontologies you're using in the format of config.example.yaml.
+
+The ontologies are needed to generate the score definitions but not to calculate the scores or do any other downstream analysis. Examples working with definition files that are already generated will work without the ontology.
 
 ## Generate score definition
 The intended use is to combine these generated definitions with some NLP results for clinical data to calculate risk scores. This code is only for the creation of the score definition, not the use of the definition.
@@ -46,7 +48,7 @@ Frailty, CHADS-VASc and HAS-BLED definitions are provided with input data (gener
 
 # Examples
 ## Generate risk score
-Run build_risk_scores.py to generate definitions for chads-vasc and has-bled using a combination of UMLS and HPO ontologies, as well as concepts we manually define for gender and age range. The resulting definition is in UMLS CUI.
+Run build_risk_scores.py to generate definitions for chads-vasc, has-bled and HFRS using a combination of UMLS, HPO and ICD10 ontologies, as well as concepts we manually define for gender and age range. The resulting definition is in UMLS CUI.
 
 Note in this example we generate data at the level of CUI, but in Bean et al. the context for the concept (from SemEHR) is used. The process is identical to this example except that to use context there is an additional mapping step from CUI to the set of CUI+context identifiers from SemEHR. The definition files from Bean et al. 2019 as CUI are in the bean2019 folder.
 

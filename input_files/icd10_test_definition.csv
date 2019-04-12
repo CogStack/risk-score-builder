@@ -1,0 +1,4 @@
+﻿root,component,points,ontology,depth
+W19,a,1,ICD10_UMLS,0
+R56,b,1,ICD10_UMLS,0
+G20,b,1,ICD10_UMLS,0
