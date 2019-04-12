@@ -22,6 +22,8 @@ component |	name (optional) |	root |	ontology |	depth |	points | sty filter (opt
 ------------ | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | -------------
 Name of the component of the risk score that this row relates to | name in the ontology | parent node identifier in the ontology | which mapper to use | number of levels of  child nodes to return | points assigned in the risk score | for UMLS, the semantic types to include (note that since this requires UMLS source files, filtering by sty is currently disabled) | any notes
 
+For depth, -1 = unlimited, 0 = don't map (pass through root id), >0 = map to depth (inclusive). Depth = 0 is useful for concepts you add manually on top of NLP features, for example "Age 65-74" which has no ontology concept. The example scripts to calculate risk scores demonstrate using this to use the feature "Age 65-74" which has no ontology concept but is defined in the input and passed through.
+
 ### 2. Manual exclusion list
 A csv file with these headings:
 
