@@ -20,7 +20,7 @@ A csv file with these headings:
 
 component |	name (optional) |	root |	ontology |	depth |	points | sty filter (optional) |	notes (optional)
 ------------ | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | -------------
-Name of the component of the risk score that this row relates to | name in the ontology | parent node identifier in the ontology | which mapper to use | number of levels of  child nodes to return | points assigned in the risk score | for UMLS, the semantic types to include | any notes
+Name of the component of the risk score that this row relates to | name in the ontology | parent node identifier in the ontology | which mapper to use | number of levels of  child nodes to return | points assigned in the risk score | for UMLS, the semantic types to include (note that since this requires UMLS source files, filtering by sty is currently disabled) | any notes
 
 ### 2. Manual exclusion list
 A csv file with these headings:
