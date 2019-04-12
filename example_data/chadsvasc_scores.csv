@@ -1,0 +1,11 @@
+vascular disease,Age 65-74,stroke,hypertension,Female,congestive heart failure,diabetes mellitus,Age gte75,total,patient_id
+0,1,0,0,1,0,0,0,2,0
+0,0,0,0,0,0,0,0,0,1
+0,0,2,0,0,0,0,2,4,2
+0,0,0,0,1,0,0,2,3,3
+0,0,0,0,1,0,0,0,1,4
+0,0,0,0,1,0,0,2,3,5
+0,0,0,0,1,0,0,0,1,6
+0,1,0,0,1,0,0,0,2,7
+0,1,0,0,1,0,0,0,2,8
+0,1,0,0,0,0,0,0,1,9

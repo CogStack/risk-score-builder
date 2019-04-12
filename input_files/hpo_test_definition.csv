@@ -1,0 +1,4 @@
+﻿component,name,root,ontology,depth,points,notes
+c1,bleeding,HP:0001892,HPO,1,1,
+c2,bleeding,HP:0001892,HPO,2,1,
+c3,bleeding,HP:0001892,HPO_UMLS,2,1,

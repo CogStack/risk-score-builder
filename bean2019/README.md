@@ -1,0 +1,1 @@
+Generated score definitions as used in Bean et al. 2019 (submitted)

@@ -1,0 +1,4 @@
+﻿component,name,root,ontology,depth,points,notes
+test,test,1,test,1,1,
+another,another_name,root_id,test,10,22,
+age_gt_70,Age greater than 70,age_gt_70,test,0,2,manually defined concept to pass straight through

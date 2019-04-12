@@ -1,0 +1,10 @@
+UMLS:
+ host: ""
+ port: ""
+ user: ""
+ pass: ""
+HPO:
+ host: ""
+ port: ""
+ user: ""
+ pass: ""
