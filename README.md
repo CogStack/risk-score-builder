@@ -13,7 +13,7 @@ This library starts from the point where you have those concepts for clinical da
 There are 3 inputs to prepare:
 1. manual definition file - these are high-level concepts that will be mapped to all descendent terms in the ontology
 2. manual exclusion list (optional)
-3. the ontology you want to use hosted somewhere e.g. locally or via a public API
+3. the ontology you want to use accessible e.g. locally or via a public API
 
 ### 1. Manual definition file
 A csv file with these headings:
@@ -32,7 +32,7 @@ name (optional) | id
 Name of the concept | identifier in the ontology you're using
 
 ### 3. The ontology
-You need the ontology/ontologies you're using for the NLP and score definitions somewhere and a mapper class (subclass of MapperTemplate) that can use the ontology to go from a root node to all child nodes at a given depth. All current mappers work with neo4j databases or the bioontology API.
+You need the ontology/ontologies you're using for the NLP and score definitions somewhere and a mapper class (subclass of MapperTemplate) that can use the ontology to go from a root node to all child nodes at a given depth. Most current mappers work with neo4j databases or the bioontology API. There is also an HPO mapper HPOLocalMapper that parses the HPO.obo file into a graph in memory, so it can run locally with no external dependencies.
 
 Create a config.yaml file with the connection information for any ontologies you're using in the format of config.example.yaml.
 
@@ -41,16 +41,16 @@ The ontologies are needed to generate the score definitions but not to calculate
 ## Generate score definition
 The intended use is to combine these generated definitions with some NLP results for clinical data to calculate risk scores. This code is only for the creation of the score definition, not the use of the definition.
 
-The ScoreBuilder class in ScoreBuilder.py handles the generation of score definitions from the manual input files. The bulk of the work is done by the mapper classes e.g. UMLSMapper, HPOMapper. ScoreBuilder uses the input definition file to dispatch the necessary mapper to find child concepts. All mappers implemented so far work with an ontology stored in Neo4j. Due to UMLS licensing, the files needed to generate the Neo4j database cannot be distributed here.
+The ScoreBuilder class in ScoreBuilder.py handles the generation of score definitions from the manual input files. The bulk of the work is done by the mapper classes e.g. UMLSMapper, HPOMapper. ScoreBuilder uses the input definition file to dispatch the necessary mapper to find child concepts. Most mappers implemented so far work with an ontology stored in Neo4j. Due to UMLS licensing, the files needed to generate the Neo4j database cannot be distributed here. The HPOLocalMapper and HPO/hpo_2019-04-15.obo.txt are included so the full pipeline can run locally for a demo definition file (input_files/hpo_demo_definition.csv).
 
 ## Apply score to patient data
-The exact details of calculating scores will depend on the NLP process used to associate UMLS concepts with patients. In Bean et al. (2019) we use SemEHR for NLP and aggregate document-level concept annotations to patient-level - each patient is represented by the sum of annotation counts across all of their documents. Per patient, any concept with <2 annotations is ignored.
+The exact details of calculating scores will depend on the NLP process used to associate ontology concepts with patients. In Bean et al. (2019) we use SemEHR for NLP and aggregate document-level concept annotations to patient-level - each patient is represented by the sum of annotation counts across all of their documents. Per patient, any concept with <2 annotations is ignored.
 
 Frailty, CHADS-VASc and HAS-BLED definitions are provided with input data (generated data NOT patient data) and code to calculate scores in the examples directory and described below.
 
 # Examples
 ## Full demo for HPO
-The script hpo_demo.py runs the entire pipeline locally, using the HPO.obo file to build the HPO ontology in memory as a graph.
+The script hpo_demo.py runs the entire pipeline locally, using the HPO.obo file to build the HPO ontology in memory as a graph. In this script we parse HPO, use it to map our definition file to a full list of concepts, then apply the score definition to some generated "patient" data. 
 
 ## Generate risk score
 Run build_risk_scores.py to generate definitions for chads-vasc, has-bled and HFRS using a combination of UMLS, HPO and ICD10 ontologies, as well as concepts we manually define for gender and age range. The resulting definition is in UMLS CUI.
