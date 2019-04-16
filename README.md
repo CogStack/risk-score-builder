@@ -49,6 +49,9 @@ The exact details of calculating scores will depend on the NLP process used to a
 Frailty, CHADS-VASc and HAS-BLED definitions are provided with input data (generated data NOT patient data) and code to calculate scores in the examples directory and described below.
 
 # Examples
+## Full demo for HPO
+The script hpo_demo.py runs the entire pipeline locally, using the HPO.obo file to build the HPO ontology in memory as a graph.
+
 ## Generate risk score
 Run build_risk_scores.py to generate definitions for chads-vasc, has-bled and HFRS using a combination of UMLS, HPO and ICD10 ontologies, as well as concepts we manually define for gender and age range. The resulting definition is in UMLS CUI.
 
@@ -72,6 +75,11 @@ Building the CH2DS2-VASc, HAS-BLED and HFRS scores defined in /input_files (as u
 
 # UMLS
 Use of UMLS is subject to license terms and as such it cannot be distributed here.
+
+#HPO
+The Human Phenotype Ontology is available here https://hpo.jax.org/app/ and described in the paper:
+Sebastian Köhler, Leigh Carmody, Nicole Vasilevsky, Julius O B Jacobsen, et al. Expansion of the Human Phenotype Ontology (HPO) knowledge base and resources. Nucleic Acids Research. (2018) doi: 10.1093/nar/gky1105
+
 
 # Bioontology
 You need to register and API key for bioontology to use their API for ICD10 mapping (used for frailty score)
