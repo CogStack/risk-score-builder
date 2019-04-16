@@ -203,7 +203,7 @@ class ICD10_UMLSMapper(MapperTemplate):
     
 
 class ScoreBuilder:
-    def __init__(self, name):
+    def __init__(self, name = ""):
         self.name = name
         self.mappers = {}
         

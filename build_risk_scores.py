@@ -13,7 +13,7 @@ import yaml, json
 with open('config.yml') as f:
     conf = yaml.load(f)
     
-builder = sb.ScoreBuilder('test')
+builder = sb.ScoreBuilder()
 tm = sb.TestMapper({}) #empty configuration for test mapper
 builder.add_mapper('Test', tm)
 
