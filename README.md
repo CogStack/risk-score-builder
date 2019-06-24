@@ -83,3 +83,10 @@ Sebastian Köhler, Leigh Carmody, Nicole Vasilevsky, Julius O B Jacobsen, et al.
 
 # Bioontology
 You need to register and API key for bioontology to use their API for ICD10 mapping (used for frailty score)
+
+
+# Funding
+Dan Bean is funded by Health Data Research UK
+
+# Contact
+Developed by Dan Bean at King's College London - daniel.bean@kcl.ac.uk
