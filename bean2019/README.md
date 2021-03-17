@@ -1,1 +1,1 @@
-Generated score definitions as used in Bean et al. 2019 (submitted)
+Generated score definitions as used in Bean et al. 2019 except chadsvasc.generated.definition.snomed.txt which is an example for the new snomed mapper.
