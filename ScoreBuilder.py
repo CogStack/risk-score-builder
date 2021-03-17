@@ -152,11 +152,14 @@ class HPOUMLSMapper(MapperTemplate):
         """
         data_dict = self.g.run(query, hpo_id = hpo_id).data()
         df2 = pd.DataFrame(data_dict)
-        df2['distance'] = df2['distance'] - 1
+        root_has_umls = df2.shape[0] != 0
         if has_child:
             out = pd.concat([df, df2], ignore_index=True)
-        else:
+        elif root_has_umls:
+            df2['distance'] = df2['distance'] - 1
             out = df2
+        else:
+             out = df2
         return out
 
 class ICD10_UMLSMapper(MapperTemplate):
