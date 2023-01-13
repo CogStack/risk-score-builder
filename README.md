@@ -1,3 +1,7 @@
+# Archived 
+
+This repo is no longer maintained. For more details please reach out directly to [@dbeanm](https://github.com/dbeanm).
+
 # Risk score builder
 A pipeline to generate definitions of clinical risk scores as UMLS CUIs. A score definition can have a combination of manual and automatic components.
 
